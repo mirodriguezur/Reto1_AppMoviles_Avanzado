@@ -34,14 +34,14 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/editTextUsuario"
+                android:id="@+id/editTextEmail"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginTop="60dp"
                 android:background="@drawable/bordes"
                 android:drawableStart="@drawable/usuarioimg"
                 android:drawablePadding="30dp"
-                android:hint="@string/usuario"
+                android:hint="@string/correo_electronico"
                 android:inputType="textEmailAddress"
                 android:padding="10dp">
 
