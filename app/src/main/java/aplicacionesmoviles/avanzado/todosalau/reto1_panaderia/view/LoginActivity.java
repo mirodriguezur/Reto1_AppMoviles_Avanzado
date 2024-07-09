@@ -1,4 +1,4 @@
-package aplicacionesmoviles.avanzado.todosalau.reto1_panaderia;
+package aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,6 +18,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.R;
 
 public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
