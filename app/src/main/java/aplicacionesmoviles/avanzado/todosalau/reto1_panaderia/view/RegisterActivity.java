@@ -118,7 +118,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     userData.put("direccion", finalFields.get(4));
                                     userData.put("correo", finalFields.get(5));
                                     userData.put("contrasena", finalFields.get(6));
-                                    userData.put("isAdmin", isAdmin ? "1" : "0");
+                                    userData.put("isAdmin", isAdmin ? true : false);
 
                                     // Guarda los datos del usuario en una colección llamada "usuarios" en Firestore, utilizando el ID único del usuario como identificador del documento.
                                     // Agrega un listener que se ejecutará cuando la operación de guardado en Firestore sea exitosa.

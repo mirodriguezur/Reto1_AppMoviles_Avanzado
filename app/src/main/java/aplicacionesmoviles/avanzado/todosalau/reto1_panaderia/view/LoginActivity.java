@@ -83,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
                             // Inicio de sesión exitoso, mostrar mensaje de éxito y redirigir a la actividad principal
                             Toast.makeText(LoginActivity.this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
                             // TODO: Redirigir A actividad AddProductActivity en caso de qu sea admin, si no, redirigir a la actividad OrderActivity
-                            Intent intent = new Intent(LoginActivity.this, AddProductActivity.class);
+                            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                             startActivity(intent);
                             finish(); // Cierra esta actividad para que el usuario no pueda volver atrás
                         } else {
@@ -119,4 +119,6 @@ public class LoginActivity extends AppCompatActivity {
 
         return List.of(email, password);
     }
+
+
 }
