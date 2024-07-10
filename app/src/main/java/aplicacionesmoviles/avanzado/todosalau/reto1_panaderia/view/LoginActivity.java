@@ -1,5 +1,6 @@
 package aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.view;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -27,6 +28,8 @@ public class LoginActivity extends AppCompatActivity {
     private EditText editTextPassword;
     private Button btnLogin;
     private Button btnRegister;
+    private Button btnForgot;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,12 +40,24 @@ public class LoginActivity extends AppCompatActivity {
         setupView();
     }
 
+    @SuppressLint("WrongViewCast")
     private void setupView() {
         // Vinculación de las vistas con los objetos correspondientes
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPassword = findViewById(R.id.editTextPassword);
         btnLogin = findViewById(R.id.buttonIngresar);
         btnRegister = findViewById(R.id.buttonRegistar);
+        btnForgot = findViewById(R.id.btnForgot);
+
+        // Configuración del botón de inicio de sesión para abrir la actividad de inicio de sesión
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                startActivity(intent);
+                finish(); // Finaliza esta actividad para que el usuario no pueda volver atrás
+            }
+        });
 
         // Configuración del botón de registro para abrir la actividad de registro
         btnRegister.setOnClickListener(new View.OnClickListener() {
@@ -61,6 +76,17 @@ public class LoginActivity extends AppCompatActivity {
                 loginUser();
             }
         });
+
+        btnForgot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
+                startActivity(intent);
+                finish(); // Finaliza esta actividad para que el usuario no pueda volver atrás
+            }
+        });
+
+
     }
 
     // Método para iniciar sesión

@@ -2,6 +2,7 @@
     <string name="app_name">Reto1_Panaderia</string>
     <string name="contrasena">Contraseña</string>
     <string name="inicio_de_sesion">Inicia sesión</string>
+    <string name="restablecer_password">Restablecer Contraseña</string>
     <string name="usuario">Usuario</string>
     <string name="nombre">Nombre</string>
     <string name="apellido">Apellido</string>
@@ -17,4 +18,6 @@
     <string name="o">- O -</string>
     <string name="acepto_t_rminos_y_condiciones">Acepto términos y condiciones</string>
     <string name="acepto_pol_tica_para_tratamientos_de_datos">Acepto política para tratamientos de datos</string>
+    <string name="restablecer">Restablecer</string>
+    <string name="volver">Volver al login</string>
 </resources>
