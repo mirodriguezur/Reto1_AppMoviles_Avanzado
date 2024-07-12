@@ -12,8 +12,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Map;
 
-import aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.R;
-
 public class HomeActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;

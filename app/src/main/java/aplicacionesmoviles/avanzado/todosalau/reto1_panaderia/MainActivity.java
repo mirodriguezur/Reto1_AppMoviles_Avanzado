@@ -6,8 +6,6 @@ import android.os.Bundle;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
-import aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.R;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override

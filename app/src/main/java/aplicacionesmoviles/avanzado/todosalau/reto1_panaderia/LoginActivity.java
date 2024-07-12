@@ -20,8 +20,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.ArrayList;
 import java.util.List;
 
-import aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.R;
-
 public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText editTextEmail;
