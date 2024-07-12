@@ -1,4 +1,4 @@
-package aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.view;
+package aplicacionesmoviles.avanzado.todosalau.reto1_panaderia;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;

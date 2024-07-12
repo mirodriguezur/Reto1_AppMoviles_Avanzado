@@ -1,4 +1,4 @@
-package aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.view;
+package aplicacionesmoviles.avanzado.todosalau.reto1_panaderia;
 
 import android.content.Intent;
 import android.os.Bundle;
