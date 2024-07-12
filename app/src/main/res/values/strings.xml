@@ -20,4 +20,13 @@
     <string name="acepto_pol_tica_para_tratamientos_de_datos">Acepto política para tratamientos de datos</string>
     <string name="restablecer">Restablecer</string>
     <string name="volver">Volver al login</string>
+    <string name="barra_titulo_producto">Gestión de Producto</string>
+    <string name="descripcion_ventana_producto">Registre los datos del nuevo producto:</string>
+    <string name="categoria_label">Categoría:</string>
+    <string name="nombre_producto_label">Nombre del producto:</string>
+    <string name="precio_producto_label">Precio unidad $</string>
+    <string name="cantidad_stock_label">Cantidad stock</string>
+    <string name="agregar_producto_boton">Agregar</string>
+    <string name="ver_productos_boton">Ver Productos</string>
+
 </resources>
