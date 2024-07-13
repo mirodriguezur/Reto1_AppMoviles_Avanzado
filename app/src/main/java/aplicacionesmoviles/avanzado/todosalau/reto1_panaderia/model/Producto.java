@@ -1,15 +1,19 @@
 package aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.model;
 
-public class Producto {
-    private int idProducto;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
+public class Producto implements Parcelable {
+    private String idProducto;
     private String categoria;
     private String nombreProducto;
     private int precioUnidad;
     private int cantidadStock;
 
     // Constructor que inicializa un producto con todos sus atributos
-    public Producto(int idProducto, String categoria, String nombreProducto, int precioUnidad, int cantidadStock) {
-        this.idProducto = idProducto;
+    public Producto(String categoria, String nombreProducto, int precioUnidad, int cantidadStock) {
         this.categoria = categoria;
         this.nombreProducto = nombreProducto;
         this.precioUnidad = precioUnidad;
@@ -22,14 +26,13 @@ public class Producto {
     }
 
     // Métodos setters y getters
-    public int getIdProducto() {
+    public String getIdProducto() {
         return idProducto;
     }
 
-    public void setIdProducto(int idProducto) {
+    public void setIdProducto(String idProducto) {
         this.idProducto = idProducto;
     }
-
     public String getCategoria() {
         return categoria;
     }
@@ -61,4 +64,38 @@ public class Producto {
     public void setCantidadStock(int cantidadStock) {
         this.cantidadStock = cantidadStock;
     }
+
+    // Implementación de Parcelable
+    protected Producto(Parcel in) {
+        idProducto = in.readString();
+        categoria = in.readString();
+        nombreProducto = in.readString();
+        precioUnidad = in.readInt();
+        cantidadStock = in.readInt();
+    }
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int i) {
+        dest.writeString(idProducto);
+        dest.writeString(categoria);
+        dest.writeString(nombreProducto);
+        dest.writeInt(precioUnidad);
+        dest.writeInt(cantidadStock);
+    }
+
+    public static final Creator<Producto> CREATOR = new Creator<Producto>() {
+        @Override
+        public Producto createFromParcel(Parcel in) {
+            return new Producto(in);
+        }
+
+        @Override
+        public Producto[] newArray(int size) {
+            return new Producto[size];
+        }
+    };
 }

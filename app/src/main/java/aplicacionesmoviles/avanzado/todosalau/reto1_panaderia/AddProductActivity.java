@@ -1,5 +1,6 @@
 package aplicacionesmoviles.avanzado.todosalau.reto1_panaderia;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,7 +17,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+import aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.model.Producto;
 import aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.presenter.ProductCategory;
+import aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.presenter.ProductManagerPresenter;
 import aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.presenter.ProductsName;
 
 public class AddProductActivity extends AppCompatActivity {
@@ -27,11 +31,15 @@ public class AddProductActivity extends AppCompatActivity {
     private Button btnAddProduct;
     private Button btnListProducts;
 
+    private ProductManagerPresenter productManagerPresenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_add_product);
+
+        productManagerPresenter = new ProductManagerPresenter(this);
 
         setupView();
         setupSpinner();
@@ -46,7 +54,41 @@ public class AddProductActivity extends AppCompatActivity {
         btnAddProduct = findViewById(R.id.btnAddProduct);
         btnListProducts = findViewById(R.id.btnListProducts);
 
-        //TODO: (Michael) Configurar la logica de los botones
+        // Configuración de listener para el botón de agregar productos
+        btnAddProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addProduct();
+            }
+        });
+
+        btnListProducts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<Producto> products = productManagerPresenter.showListProducts();
+                // Asegúrate de que la lista de productos no sea null
+                if (products == null) {
+                    return;
+                }
+                Intent intent = new Intent(AddProductActivity.this, ListProductsActivity.class);
+                intent.putParcelableArrayListExtra("products", (ArrayList<Producto>) products);
+                startActivity(intent);
+            }
+        });
+    }
+
+    // Método para agregar un nuevo producto
+    private void addProduct() {
+        String category = spnCategories.getSelectedItem().toString();
+        String productName = spnProductName.getSelectedItem().toString();
+        int price = Integer.parseInt(editTextPrice.getText().toString());
+        int amount = Integer.parseInt(editTextAmount.getText().toString());
+
+        if (!category.isEmpty() && !productName.isEmpty() && price > 0 && amount > 0) {
+            productManagerPresenter.insertProductToLocalDb(category, productName, price, amount);
+        } else {
+            Toast.makeText(this, "Complete todos los campos", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void setupSpinner() {
