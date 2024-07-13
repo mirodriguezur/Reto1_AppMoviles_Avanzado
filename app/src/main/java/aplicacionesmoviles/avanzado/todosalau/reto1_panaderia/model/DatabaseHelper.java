@@ -9,10 +9,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     // Sentencia SQL para crear las tablas de datos
-    private static final String CREATE_TABLE_PRODUCTS = "CREATE TABLE producto (id_producto INTEGER PRIMARY KEY AUTOINCREMENT, categoria TEXT NOT NULL, nombre_producto TEXT NOT NULL, precio_unidad INTEGER NOT NULL, cantidad_stock INTEGER NOT NULL)";
-    private static final String CREATE_TABLE_USERS = "CREATE TABLE usuario (cedula INTEGER PRIMARY KEY, nombre TEXT NOT NULL, apellido TEXT NOT NULL, numero_telefonico INTEGER NOT NULL, direccion TEXT NOT NULL, es_administrador BOOLEAN NOT NULL, correo TEXT UNIQUE NOT NULL, contraseña TEXT NOT NULL)";
-    private static final String CREATE_TABLE_ORDERS = "CREATE TABLE pedido (id_pedido INTEGER PRIMARY KEY AUTOINCREMENT, cedula_usuario INTEGER NOT NULL, fecha TEXT NOT NULL, total_costo INTEGER NOT NULL, FOREIGN KEY (cedula_usuario) REFERENCES usuario(cedula))";
-    private static final String CREATE_TABLE_ORDERSPRODUCTS = "CREATE TABLE pedidoproducto (id_pedido INTEGER NOT NULL, id_producto INTEGER NOT NULL, cantidad_producto INTEGER NOT NULL, precio_unitario INTEGER NOT NULL, subtotal INTEGER NOT NULL, PRIMARY KEY (id_pedido, id_producto), FOREIGN KEY (id_pedido) REFERENCES pedido(id_pedido), FOREIGN KEY (id_producto) REFERENCES producto(id_producto))";
+    private static final String CREATE_TABLE_PRODUCTS = "CREATE TABLE producto (idProducto INTEGER PRIMARY KEY AUTOINCREMENT, categoria TEXT NOT NULL, nombreProducto TEXT NOT NULL, precioUnidad INTEGER NOT NULL, cantidadStock INTEGER NOT NULL)";
+    private static final String CREATE_TABLE_USERS = "CREATE TABLE usuario (cedula INTEGER PRIMARY KEY, nombre TEXT NOT NULL, apellido TEXT NOT NULL, numeroTelefonico INTEGER NOT NULL, direccion TEXT NOT NULL, esAdministrador BOOLEAN NOT NULL, correo TEXT UNIQUE NOT NULL, password TEXT NOT NULL)";
+    private static final String CREATE_TABLE_ORDERS = "CREATE TABLE pedido (idPedido INTEGER PRIMARY KEY AUTOINCREMENT, cedulaUsuario INTEGER NOT NULL, fecha TEXT NOT NULL, totalCosto INTEGER NOT NULL, FOREIGN KEY (cedulaUsuario) REFERENCES usuario(cedula))";
+    private static final String CREATE_TABLE_ORDERSPRODUCTS = "CREATE TABLE pedidoproducto (idPedido INTEGER NOT NULL, idProducto INTEGER NOT NULL, cantidadProducto INTEGER NOT NULL, precioUnitario INTEGER NOT NULL, subtotal INTEGER NOT NULL, PRIMARY KEY (idPedido, idProducto), FOREIGN KEY (idPedido) REFERENCES pedido(idPedido), FOREIGN KEY (idProducto) REFERENCES producto(idProducto))";
 
     // Constructor
     public DatabaseHelper(Context context) {
