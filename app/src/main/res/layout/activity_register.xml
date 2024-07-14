@@ -22,7 +22,7 @@
                 android:layout_height="70dp" />
 
             <androidx.cardview.widget.CardView
-                android:layout_width="350dp"
+                android:layout_width="330dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#FFFFFF"
                 app:cardCornerRadius="30dp"
@@ -35,16 +35,24 @@
                     android:orientation="vertical"
                     android:padding="20dp">
 
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center"
+                        app:srcCompat="@drawable/logoapp" />
+
                     <Space
                         android:layout_width="match_parent"
-                        android:layout_height="10dp" />
+                        android:layout_height="15dp" />
 
                     <TextView
                         android:id="@+id/textViewRegistrate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/registro"
-                        android:textColor="#795548"
+                        android:textColor="#663333"
                         android:textSize="23sp"
                         android:textStyle="bold" />
 
@@ -163,7 +171,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="10dp"
-                        android:backgroundTint="#795548"
+                        android:backgroundTint="#663333"
                         android:text="@string/registro" />
 
                     <Button
@@ -172,7 +180,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="10dp"
-                        android:backgroundTint="#795548"
+                        android:backgroundTint="#663333"
                         android:text="@string/ingresar" />
 
                     <Space

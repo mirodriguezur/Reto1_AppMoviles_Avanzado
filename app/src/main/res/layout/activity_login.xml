@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="350dp"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:backgroundTint="#FFFFFF"
@@ -21,15 +21,23 @@
             android:orientation="vertical"
             android:padding="24dp">
 
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_marginTop="10dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/logoapp" />
+
             <TextView
                 android:id="@+id/textViewInicioSesion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/inicio_de_sesion"
                 android:textAlignment="center"
-                android:textColor="#795548"
+                android:textColor="#663333"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -67,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"
-                android:backgroundTint="#795548"
+                android:backgroundTint="#663333"
                 android:text="@string/ingresar" />
 
             <TextView
@@ -86,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="5dp"
-                android:backgroundTint="#795548"
+                android:backgroundTint="#663333"
                 android:text="@string/registro" />
 
             <Button
