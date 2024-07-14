@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.ListProductsActivity;
 import aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.model.Producto;
 import aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.R;
 
@@ -84,10 +85,11 @@ public class ProductManagerCellAdapter extends ArrayAdapter<Producto> {
             });
 
             buttonDelete.setOnClickListener(v -> {
-                // TODO: (Michael) manejar la logica de eliminar producto
+                if (mContext instanceof ListProductsActivity) {
+                    ((ListProductsActivity) mContext).deleteProduct(product);
+                }
             });
         }
-
         return view;
     }
 
