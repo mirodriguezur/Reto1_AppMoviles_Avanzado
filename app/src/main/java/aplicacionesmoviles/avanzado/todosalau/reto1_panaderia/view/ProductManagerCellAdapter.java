@@ -1,11 +1,13 @@
 package aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.view;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -85,8 +87,7 @@ public class ProductManagerCellAdapter extends ArrayAdapter<Producto> {
 
             // Asignar listeners a los botones
             buttonEdit.setOnClickListener(v -> {
-                // TODO: (Michael) manejar la logica de modificar producto
-
+                getNewProduct(product);
             });
 
             buttonDelete.setOnClickListener(v -> {
@@ -96,6 +97,32 @@ public class ProductManagerCellAdapter extends ArrayAdapter<Producto> {
             });
         }
         return view;
+    }
+
+    public void getNewProduct( Producto product) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        LayoutInflater inflater = LayoutInflater.from(mContext);
+        View dialogView = inflater.inflate(R.layout.update_product, null);
+        EditText editTextAmountEdit = dialogView.findViewById(R.id.editTextAmountEdit);
+        EditText editTextPriceEdit = dialogView.findViewById(R.id.editTextPriceEdit);
+
+        ImageView imageProduct = dialogView.findViewById(R.id.imageModifProduct);
+        showImage(imageProduct, ProductsName.valueOf(formatProductName(String.valueOf(product.getNombreProducto()))));
+        builder.setView(dialogView);
+        builder.setTitle("Edicion Producto");
+        builder.setMessage("Ingresa los datos del producto");
+        builder.setPositiveButton("Aceptar", (dialog, which) -> {
+            product.setCantidadStock( Integer.parseInt(editTextAmountEdit.getText().toString()));
+            product.setPrecioUnidad( Integer.parseInt(editTextPriceEdit.getText().toString()));
+            if (mContext instanceof ListProductsActivity) {
+                ((ListProductsActivity) mContext).updateProduct(product);
+            }
+        });
+        builder.setNegativeButton("Cancelar", (dialog, which) -> {
+
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     @Override
