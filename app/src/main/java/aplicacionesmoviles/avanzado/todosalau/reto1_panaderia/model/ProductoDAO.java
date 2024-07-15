@@ -112,6 +112,26 @@ public class ProductoDAO implements ProductoDAOInterface {
         }
     }
 
+    // Metodo para Modificar un producto de la BD
+    public void updateProduct(Producto product) {
+        SQLiteDatabase db = null;
+        try {
+            db = dbHelper.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put("categoria", product.getCategoria());
+            values.put("nombreProducto", product.getNombreProducto());
+            values.put("precioUnidad", product.getPrecioUnidad());
+            values.put("cantidadStock", product.getCantidadStock());
+            db.update("producto", values, "idProducto" + "=?", new String[]{product.getIdProducto()});
+        } catch (Exception e) {
+            Log.e("ProductDatabaseHelper", "Error al modificar el producto: " + e.getMessage());
+        } finally {
+            if (db != null) {
+                db.close();
+            }
+        }
+    }
+
     // Método para verificar si un producto existe en la base de datos
     /*public boolean productExists(String id) {
         SQLiteDatabase db = null;

@@ -30,6 +30,10 @@ public class ProductManagerPresenter {
         productDAO.deleteProduct(product.getIdProducto());
     }
 
+    public void updateProduct(Producto product) {
+        productDAO.updateProduct(product.getIdProducto(), product.getCategoria(), product.getNombreProducto(), product.getPrecioUnidad(), product.getCantidadStock());
+    }
+
     private String setFormatCategoryString(String category) {
         return category.substring(0, 1).toUpperCase() + category.substring(1).toLowerCase();
     }
