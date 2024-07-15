@@ -64,6 +64,12 @@ public class ListProductsActivity extends AppCompatActivity {
         Toast.makeText(this, "Producto eliminado exitosamente", Toast.LENGTH_SHORT).show();
     }
 
+    public void updateProduct(Producto product) {
+        productManagerPresenter.updateProduct(product);
+        loadProductsFromDatabase();
+        Toast.makeText(this, "Producto actualizado exitosamente", Toast.LENGTH_SHORT).show();
+    }
+
     private void updateProductList(ArrayList<Producto> products) {
         productCellAdapter.clear();
         productCellAdapter.addAll(products);
