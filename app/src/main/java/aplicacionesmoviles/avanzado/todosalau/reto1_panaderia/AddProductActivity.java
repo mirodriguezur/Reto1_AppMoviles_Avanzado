@@ -77,10 +77,13 @@ public class AddProductActivity extends AppCompatActivity {
 
     // Método para agregar un nuevo producto
     private void addProduct() {
+        int price = 0, amount = 0;
         String category = spnCategories.getSelectedItem().toString();
         String productName = spnProductName.getSelectedItem().toString();
-        int price = Integer.parseInt(editTextPrice.getText().toString());
-        int amount = Integer.parseInt(editTextAmount.getText().toString());
+        if (!editTextPrice.getText().toString().isEmpty() && !editTextAmount.getText().toString().isEmpty()) {
+            price = Integer.parseInt(editTextPrice.getText().toString());
+            amount = Integer.parseInt(editTextAmount.getText().toString());
+        }
 
         if (!category.isEmpty() && !productName.isEmpty() && price > 0 && amount > 0) {
             productManagerPresenter.insertProductToLocalDb(category, productName, price, amount, new ProductManagerPresenter.OnInsertProductListener() {
