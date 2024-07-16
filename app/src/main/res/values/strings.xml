@@ -28,5 +28,8 @@
     <string name="cantidad_stock_label">Cantidad stock</string>
     <string name="agregar_producto_boton">Agregar</string>
     <string name="ver_productos_boton">Ver Productos</string>
+    <string name="title_activity_splashscreen">SplashscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 
 </resources>
