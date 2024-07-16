@@ -28,8 +28,6 @@ public class AddProductActivity extends AppCompatActivity {
     private Spinner spnProductName;
     private EditText editTextPrice;
     private EditText editTextAmount;
-    private Button btnAddProduct;
-    private Button btnListProducts;
 
     private ProductManagerPresenter productManagerPresenter;
 
@@ -51,8 +49,8 @@ public class AddProductActivity extends AppCompatActivity {
         spnProductName = findViewById(R.id.spnProductName);
         editTextPrice = findViewById(R.id.editTextPrice);
         editTextAmount = findViewById(R.id.editTextAmount);
-        btnAddProduct = findViewById(R.id.btnAddProduct);
-        btnListProducts = findViewById(R.id.btnListProducts);
+        Button btnAddProduct = findViewById(R.id.btnAddProduct);
+        Button btnListProducts = findViewById(R.id.btnListProducts);
 
         // Configuración de listener para el botón de agregar productos
         btnAddProduct.setOnClickListener(new View.OnClickListener() {
