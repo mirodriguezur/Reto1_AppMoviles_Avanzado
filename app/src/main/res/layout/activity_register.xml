@@ -175,7 +175,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="10dp"
-                        android:backgroundTint="#795548"
+                        android:backgroundTint="#663333"
                         android:text="@string/registro" />
 
                     <Button
@@ -184,7 +184,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="10dp"
-                        android:backgroundTint="#795548"
+                        android:backgroundTint="#663333"
                         android:text="@string/ingresar" />
 
                     <Space
