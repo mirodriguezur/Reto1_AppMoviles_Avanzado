@@ -41,137 +41,192 @@
     </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <androidx.cardview.widget.CardView
+        android:layout_width="354dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="#FFFFFF"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="30dp">
 
-        <TextView
-            android:id="@+id/txtDescription"
-            android:layout_width="330dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="90dp"
-            android:layout_marginEnd="50dp"
-            android:text="@string/descripcion_ventana_producto"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/txtCategoryLabel"
-            android:layout_width="330dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="50dp"
-            android:text="@string/categoria_label"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtDescription" />
-
-        <Spinner
-            android:id="@+id/spnCategories"
-            android:layout_width="335dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="5sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtCategoryLabel" />
-
-        <TextView
-            android:id="@+id/txtNameLabel"
-            android:layout_width="330dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="50dp"
-            android:text="@string/nombre_producto_label"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spnCategories" />
-
-        <Spinner
-            android:id="@+id/spnProductName"
-            android:layout_width="335dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="10sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtNameLabel" />
-
-        <LinearLayout
-            android:id="@+id/linearLayoutCategories"
-            android:layout_width="335dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spnProductName">
-
-            <ImageView
-                android:id="@+id/imageProduct"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_weight="0"
-                app:srcCompat="@drawable/pan_breton" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <LinearLayout
+                android:id="@+id/linearLayoutHeader"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0"
-                android:padding="10dp"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
 
-                <EditText
-                    android:id="@+id/editTextPrice"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/txtDescription"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="@string/precio_producto_label"
-                    android:inputType="number" />
+                    android:paddingTop="20dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="5dp"
+                    android:text="@string/descripcion_ventana_producto"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
-                <EditText
-                    android:id="@+id/editTextAmount"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="@string/cantidad_stock_label"
-                    android:inputType="number" />
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    android:padding="5dp"
+                    app:srcCompat="@drawable/logoapp" />
+
             </LinearLayout>
 
-        </LinearLayout>
+            <TextView
+                android:id="@+id/txtCategoryLabel"
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="50dp"
+                android:text="@string/categoria_label"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayoutHeader" />
 
-        <Button
-            android:id="@+id/btnAddProduct"
-            android:layout_width="230dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="60dp"
-            android:backgroundTint="@color/darkcofee"
-            android:text="@string/agregar_producto_boton"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.502"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayoutCategories" />
+            <Spinner
+                android:id="@+id/spnCategories"
+                android:layout_width="335dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="5sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtCategoryLabel" />
+
+            <TextView
+                android:id="@+id/txtNameLabel"
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="50dp"
+                android:text="@string/nombre_producto_label"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spnCategories" />
+
+            <Spinner
+                android:id="@+id/spnProductName"
+                android:layout_width="335dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtNameLabel" />
+
+            <LinearLayout
+                android:id="@+id/linearLayoutCategories"
+                android:layout_width="335dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spnProductName">
+
+                <ImageView
+                    android:id="@+id/imageProduct"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_weight="0"
+                    app:srcCompat="@drawable/pan_breton" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <EditText
+                        android:id="@+id/editTextPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/precio_producto_label"
+                        android:inputType="number" />
+
+                    <EditText
+                        android:id="@+id/editTextAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/cantidad_stock_label"
+                        android:inputType="number" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/txtProductDescription"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="15dp"
+                android:hint="@string/celda_descripcion"
+                android:inputType="textMultiLine"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayoutCategories" />
+
+            <LinearLayout
+                android:id="@+id/linearLayoutFooter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtProductDescription">
+
+                <Button
+                    android:id="@+id/btnAddProduct"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:backgroundTint="@color/darkcofee"
+                    android:text="@string/agregar_producto_boton"
+                    android:textSize="17sp" />
 
 
-        <Button
-            android:id="@+id/btnListProducts"
-            android:layout_width="230dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="20dp"
-            android:backgroundTint="@color/darkcofee"
-            android:text="@string/ver_productos_boton"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnAddProduct" />
+                <Button
+                    android:id="@+id/btnListProducts"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/darkcofee"
+                    android:text="@string/ver_productos_boton"
+                    android:textSize="17sp" />
 
+            </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
