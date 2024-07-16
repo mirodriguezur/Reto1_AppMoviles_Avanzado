@@ -15,11 +15,16 @@ public class ProductManagerPresenter {
         this.productDAO = new ProductoDAO(context);
     }
 
-    public void insertProductToLocalDb(String category, String productName, int price, int amount) {
+    public void insertProductToLocalDb(String category, String productName, int price, int amount, OnInsertProductListener listener) {
         String validCategory = setFormatCategoryString(category);
         String validProductName = setFormatProductNameString(productName);
         Producto product = new Producto(validCategory, validProductName, price, amount);
-        productDAO.insertProduct(product);
+        long result =productDAO.insertProduct(product);
+        if (result != -1) {
+            listener.onSuccess(); //Notifica al listener que la inserción fue exitosa
+        } else {
+            listener.onError();  //Notifica al listener que la inserción falló
+        }
     }
 
     public List<Producto> showListProducts() {
@@ -52,5 +57,10 @@ public class ProductManagerPresenter {
             }
         }
         return result.toString();
+    }
+
+    public interface OnInsertProductListener {
+        void onSuccess();
+        void onError();
     }
 }
