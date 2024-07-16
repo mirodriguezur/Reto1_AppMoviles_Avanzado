@@ -26,7 +26,6 @@ public class ProductoDAO implements ProductoDAOInterface {
             return;
         }*/
         SQLiteDatabase db = null;
-        long newRowId;
         try {
             db = dbHelper.getWritableDatabase();
             ContentValues values = new ContentValues();
