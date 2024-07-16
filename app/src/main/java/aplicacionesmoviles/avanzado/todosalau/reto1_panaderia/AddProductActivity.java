@@ -85,7 +85,20 @@ public class AddProductActivity extends AppCompatActivity {
         int amount = Integer.parseInt(editTextAmount.getText().toString());
 
         if (!category.isEmpty() && !productName.isEmpty() && price > 0 && amount > 0) {
-            productManagerPresenter.insertProductToLocalDb(category, productName, price, amount);
+            productManagerPresenter.insertProductToLocalDb(category, productName, price, amount, new ProductManagerPresenter.OnInsertProductListener() {
+
+                @Override
+                public void onSuccess() {
+                    // En caso de que la insersión fue exitosa, muestra mensaje exitoso
+                    Toast.makeText(AddProductActivity.this, "Producto agregado exitosamente", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onError() {
+                    // Si la insersión falla, muestra mensaje de falla
+                    Toast.makeText(AddProductActivity.this, "Error al agregar producto", Toast.LENGTH_SHORT).show();
+                }
+            });
         } else {
             Toast.makeText(this, "Complete todos los campos", Toast.LENGTH_SHORT).show();
         }

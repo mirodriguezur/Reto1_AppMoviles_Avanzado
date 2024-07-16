@@ -18,7 +18,7 @@ public class ProductoDAO implements ProductoDAOInterface {
 
     // Métodos para operaciones CRUD (Create, Read, Update, Delete)
     // Método para insertar un nuevo producto en la base de datos
-    public void insertProduct(Producto product) {
+    public long insertProduct(Producto product) {
         // Verificar si el producto ya existe antes de agregarlo
         /*if (productExists(product.getNombreProducto())) {
             // El producto ya existe, no se hace nada
@@ -26,6 +26,7 @@ public class ProductoDAO implements ProductoDAOInterface {
             return;
         }*/
         SQLiteDatabase db = null;
+        long newRowId;
         try {
             db = dbHelper.getWritableDatabase();
             ContentValues values = new ContentValues();
@@ -33,11 +34,10 @@ public class ProductoDAO implements ProductoDAOInterface {
             values.put("nombreProducto", product.getNombreProducto());
             values.put("precioUnidad", product.getPrecioUnidad());
             values.put("cantidadStock", product.getCantidadStock());
-            //long id = db.insert("producto", null, values);
-            //product.setIdProducto(String.valueOf(id));
-            db.insert("producto", null, values);
+            return db.insert("producto", null, values);
         } catch (Exception e) {
             Log.e("ProductDatabaseHelper", "Error al agregar producto", e);
+            return -1;
         } finally {
             if (db != null) {
                 db.close();
