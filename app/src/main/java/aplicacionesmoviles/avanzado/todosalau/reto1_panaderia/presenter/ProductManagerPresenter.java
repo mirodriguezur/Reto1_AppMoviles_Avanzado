@@ -16,7 +16,7 @@ public class ProductManagerPresenter {
     }
 
     public void insertProductToLocalDb(String category, String productName, String description, int price, int amount, OnInsertProductListener listener) {
-        String validCategory = setFormatCategoryString(category); //TODO: Revisar porque  no funciona
+        String validCategory = setFormatCategoryString(category);
         String validProductName = setFormatProductNameString(productName);
 
         if (productDAO.productExistsByName(validProductName)) {
@@ -55,8 +55,12 @@ public class ProductManagerPresenter {
 
         for (int i = 0; i < words.length; i++) {
             String word = words[i].toLowerCase();
-            if(!word.isEmpty()) {
-                result.append(word.substring(0, 1).toUpperCase() + word.substring(1));
+            if (!word.isEmpty()) {
+                if (i == 0) { // Solo capitalizar la primera palabra
+                    result.append(word.substring(0, 1).toUpperCase()).append(word.substring(1));
+                } else {
+                    result.append(word); // Dejar las demás palabras en minúsculas
+                }
                 if (i < words.length - 1) {
                     result.append(" ");
                 }
