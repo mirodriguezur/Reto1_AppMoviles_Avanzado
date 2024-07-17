@@ -1,5 +1,6 @@
 package aplicacionesmoviles.avanzado.todosalau.reto1_panaderia;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,7 +17,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+import aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.model.Producto;
 import aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.presenter.ProductCategory;
+import aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.presenter.ProductManagerPresenter;
 import aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.presenter.ProductsName;
 
 public class AddProductActivity extends AppCompatActivity {
@@ -24,14 +28,17 @@ public class AddProductActivity extends AppCompatActivity {
     private Spinner spnProductName;
     private EditText editTextPrice;
     private EditText editTextAmount;
-    private Button btnAddProduct;
-    private Button btnListProducts;
+    private EditText editTextDescription;
+
+    private ProductManagerPresenter productManagerPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_add_product);
+
+        productManagerPresenter = new ProductManagerPresenter(this);
 
         setupView();
         setupSpinner();
@@ -41,12 +48,71 @@ public class AddProductActivity extends AppCompatActivity {
         imageProduct = findViewById(R.id.imageProduct);
         spnCategories = findViewById(R.id.spnCategories);
         spnProductName = findViewById(R.id.spnProductName);
+        editTextDescription = findViewById(R.id.txtProductDescription);
         editTextPrice = findViewById(R.id.editTextPrice);
         editTextAmount = findViewById(R.id.editTextAmount);
-        btnAddProduct = findViewById(R.id.btnAddProduct);
-        btnListProducts = findViewById(R.id.btnListProducts);
+        Button btnAddProduct = findViewById(R.id.btnAddProduct);
+        Button btnListProducts = findViewById(R.id.btnListProducts);
 
-        //TODO: (Michael) Configurar la logica de los botones
+        // Configuración de listener para el botón de agregar productos
+        btnAddProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addProduct();
+            }
+        });
+
+        btnListProducts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<Producto> products = productManagerPresenter.showListProducts();
+                // Asegúrate de que la lista de productos no sea null
+                if (products == null) {
+                    return;
+                }
+                Intent intent = new Intent(AddProductActivity.this, ListProductsActivity.class);
+                intent.putParcelableArrayListExtra("products", (ArrayList<Producto>) products);
+                startActivity(intent);
+            }
+        });
+    }
+
+    // Método para agregar un nuevo producto
+    private void addProduct() {
+        int price = 0, amount = 0;
+        String category = spnCategories.getSelectedItem().toString();
+        String productName = spnProductName.getSelectedItem().toString();
+        String description = editTextDescription.getText().toString();
+        if (!editTextPrice.getText().toString().isEmpty() && !editTextAmount.getText().toString().isEmpty()) {
+            price = Integer.parseInt(editTextPrice.getText().toString());
+            amount = Integer.parseInt(editTextAmount.getText().toString());
+        }
+
+        if (!category.isEmpty() && !productName.isEmpty() && price > 0 && amount > 0 && !description.isEmpty()) {
+            productManagerPresenter.insertProductToLocalDb(category, productName, description, price, amount, new ProductManagerPresenter.OnInsertProductListener() {
+
+                @Override
+                public void onSuccess() {
+                    // En caso de que la insersión fue exitosa, muestra mensaje exitoso
+                    Toast.makeText(AddProductActivity.this, "Producto agregado exitosamente", Toast.LENGTH_SHORT).show();
+                    cleanFields();
+                }
+
+                @Override
+                public void onError() {
+                    // Si la insersión falla, muestra mensaje de falla
+                    Toast.makeText(AddProductActivity.this, "Error al agregar producto", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onExistingProduct() {
+                    // Si el producto ya existe, muestra mensaje de que ya existe
+                    Toast.makeText(AddProductActivity.this, "El producto ya existe", Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            Toast.makeText(this, "Complete todos los campos", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void setupSpinner() {
@@ -97,7 +163,15 @@ public class AddProductActivity extends AppCompatActivity {
         return filteredProducts;
     }
 
+    private void cleanFields() {
+        // Limpia los campos después del registro exitoso
+        editTextDescription.setText("");
+        editTextPrice.setText("");
+        editTextAmount.setText("");
+    }
+
     private void showImage(ProductsName product) {
+        // Muestra la imagen correspondiente al producto seleccionado
         switch (product) {
             case PAN_BRETON:
                 imageProduct.setImageResource(R.drawable.pan_breton);
@@ -152,6 +226,27 @@ public class AddProductActivity extends AppCompatActivity {
                 break;
             case DONA_STRAWBERRY_FROSTED:
                 imageProduct.setImageResource(R.drawable.dona_strawberry_frosted);
+                break;
+            case AROMATICA:
+                imageProduct.setImageResource(R.drawable.bebida_aromatica);
+                break;
+            case CAFE:
+                imageProduct.setImageResource(R.drawable.bebida_cafe);
+                break;
+            case COCACOLA:
+                imageProduct.setImageResource(R.drawable.bebida_cocacola);
+                break;
+            case COLOMBIANA:
+                imageProduct.setImageResource(R.drawable.bebida_colombiana);
+                break;
+            case AGUA_CON_GAS:
+                imageProduct.setImageResource(R.drawable.bebida_h2o);
+                break;
+            case AGUA_SIN_GAS:
+                imageProduct.setImageResource(R.drawable.bebida_h2o);
+                break;
+            case JUGO_HIT:
+                imageProduct.setImageResource(R.drawable.bebida_hit);
                 break;
             default:
                 imageProduct.setImageResource(R.drawable.ic_arrow_back);

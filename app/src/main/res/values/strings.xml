@@ -28,8 +28,19 @@
     <string name="cantidad_stock_label">Cantidad stock</string>
     <string name="agregar_producto_boton">Agregar</string>
     <string name="ver_productos_boton">Ver Productos</string>
+    <string name="listado_de_productos">Listado de productos</string>
+    <string name="celda_categoria_label">Categoría: </string>
+    <string name="celda_nombre_producto_label">Nombre: </string>
+    <string name="celda_precio_label">Precio: </string>
+    <string name="celda_cantidad_label">Cantidad: </string>
+    <string name="celda_modificar_boton">Modificar</string>
+    <string name="celda_eliminar_boton">Eliminar</string>
+    <string name="price_format">%.2f</string>
     <string name="title_activity_splashscreen">SplashscreenActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="celda_descripcion">Descripción</string>
+    <string name="lista_descripcion">Descripción: </string>
+    <string name="sincronizar_boton">Sincronizar</string>>
 
 </resources>
