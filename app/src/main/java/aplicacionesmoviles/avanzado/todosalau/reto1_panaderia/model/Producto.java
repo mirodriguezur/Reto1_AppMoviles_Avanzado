@@ -5,6 +5,9 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Producto implements Parcelable {
     private String idProducto;
     private String categoria;
@@ -111,4 +114,16 @@ public class Producto implements Parcelable {
             return new Producto[size];
         }
     };
+
+    // Convierte las propiedades del producto en un mapa para almacenamiento o envío
+    public Map<String, Object> toMap() {
+        Map<String, Object> result = new HashMap<>();
+        result.put("idProducto", idProducto); // Agrega el ID al mapa
+        result.put("categoria", categoria); // Agrega la categoría al mapa
+        result.put("nombreProducto", nombreProducto); // Agrega el nombre del producto al mapa
+        result.put("descripcion", descripcion); // Agrega la descripción al mapa
+        result.put("precioUnidad", precioUnidad); // Agrega la cantidad en stock al mapa
+        result.put("cantidadStock", cantidadStock); // Agrega la cantidad en stock al mapa
+        return result; // Devuelve el mapa con las propiedades del producto
+    }
 }
