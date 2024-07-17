@@ -101,12 +101,17 @@ public class ProductManagerCellAdapter extends ArrayAdapter<Producto> {
         return view;
     }
 
-    public void getNewProduct( Producto product) {
+    public void getNewProduct(Producto product) {
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View dialogView = inflater.inflate(R.layout.update_product, null);
         EditText editTextAmountEdit = dialogView.findViewById(R.id.editTextAmountEdit);
         EditText editTextPriceEdit = dialogView.findViewById(R.id.editTextPriceEdit);
+        EditText editTextDescriptionEdit = dialogView.findViewById(R.id.editTextDescriptionEdit);
+
+        editTextPriceEdit.setText(String.valueOf(product.getPrecioUnidad()));
+        editTextAmountEdit.setText(String.valueOf(product.getCantidadStock()));
+        editTextDescriptionEdit.setText(product.getDescripcion());
 
         ImageView imageProduct = dialogView.findViewById(R.id.imageModifProduct);
         showImage(imageProduct, ProductsName.valueOf(formatProductName(String.valueOf(product.getNombreProducto()))));
@@ -116,6 +121,7 @@ public class ProductManagerCellAdapter extends ArrayAdapter<Producto> {
         builder.setPositiveButton("Aceptar", (dialog, which) -> {
             product.setCantidadStock( Integer.parseInt(editTextAmountEdit.getText().toString()));
             product.setPrecioUnidad( Integer.parseInt(editTextPriceEdit.getText().toString()));
+            product.setDescripcion(editTextDescriptionEdit.getText().toString());
             if (mContext instanceof ListProductsActivity) {
                 ((ListProductsActivity) mContext).updateProduct(product);
             }
