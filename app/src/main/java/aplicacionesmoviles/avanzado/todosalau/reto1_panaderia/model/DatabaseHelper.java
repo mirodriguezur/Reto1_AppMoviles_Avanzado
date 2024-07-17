@@ -5,11 +5,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "panappetitBaseDeDatos";
+    private static final String DATABASE_NAME = "bakeryPalaceBaseDeDatos";
     private static final int DATABASE_VERSION = 1;
 
     // Sentencia SQL para crear las tablas de datos
-    private static final String CREATE_TABLE_PRODUCTS = "CREATE TABLE producto (idProducto INTEGER PRIMARY KEY AUTOINCREMENT, categoria TEXT NOT NULL, nombreProducto TEXT NOT NULL, precioUnidad INTEGER NOT NULL, cantidadStock INTEGER NOT NULL)";
+    private static final String CREATE_TABLE_PRODUCTS = "CREATE TABLE producto (idProducto INTEGER PRIMARY KEY AUTOINCREMENT, categoria TEXT NOT NULL, nombreProducto TEXT NOT NULL, descripcion TEXT NOT NULL, precioUnidad INTEGER NOT NULL, cantidadStock INTEGER NOT NULL)";
     private static final String CREATE_TABLE_USERS = "CREATE TABLE usuario (cedula INTEGER PRIMARY KEY, nombre TEXT NOT NULL, apellido TEXT NOT NULL, numeroTelefonico INTEGER NOT NULL, direccion TEXT NOT NULL, esAdministrador BOOLEAN NOT NULL, correo TEXT UNIQUE NOT NULL, password TEXT NOT NULL)";
     private static final String CREATE_TABLE_ORDERS = "CREATE TABLE pedido (idPedido INTEGER PRIMARY KEY AUTOINCREMENT, cedulaUsuario INTEGER NOT NULL, fecha TEXT NOT NULL, totalCosto INTEGER NOT NULL, FOREIGN KEY (cedulaUsuario) REFERENCES usuario(cedula))";
     private static final String CREATE_TABLE_ORDERSPRODUCTS = "CREATE TABLE pedidoproducto (idPedido INTEGER NOT NULL, idProducto INTEGER NOT NULL, cantidadProducto INTEGER NOT NULL, precioUnitario INTEGER NOT NULL, subtotal INTEGER NOT NULL, PRIMARY KEY (idPedido, idProducto), FOREIGN KEY (idPedido) REFERENCES pedido(idPedido), FOREIGN KEY (idProducto) REFERENCES producto(idProducto))";

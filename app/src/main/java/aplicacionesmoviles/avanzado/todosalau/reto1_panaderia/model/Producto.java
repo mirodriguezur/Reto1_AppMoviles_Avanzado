@@ -9,13 +9,15 @@ public class Producto implements Parcelable {
     private String idProducto;
     private String categoria;
     private String nombreProducto;
+    private String descripcion;
     private int precioUnidad;
     private int cantidadStock;
 
     // Constructor que inicializa un producto con todos sus atributos
-    public Producto(String categoria, String nombreProducto, int precioUnidad, int cantidadStock) {
+    public Producto(String categoria, String nombreProducto, String descripcion, int precioUnidad, int cantidadStock) {
         this.categoria = categoria;
         this.nombreProducto = nombreProducto;
+        this.descripcion = descripcion;
         this.precioUnidad = precioUnidad;
         this.cantidadStock = cantidadStock;
     }
@@ -33,6 +35,7 @@ public class Producto implements Parcelable {
     public void setIdProducto(String idProducto) {
         this.idProducto = idProducto;
     }
+
     public String getCategoria() {
         return categoria;
     }
@@ -47,6 +50,14 @@ public class Producto implements Parcelable {
 
     public void setNombreProducto(String nombreProducto) {
         this.nombreProducto = nombreProducto;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
     }
 
     public int getPrecioUnidad() {
@@ -70,6 +81,7 @@ public class Producto implements Parcelable {
         idProducto = in.readString();
         categoria = in.readString();
         nombreProducto = in.readString();
+        descripcion = in.readString();
         precioUnidad = in.readInt();
         cantidadStock = in.readInt();
     }
@@ -83,6 +95,7 @@ public class Producto implements Parcelable {
         dest.writeString(idProducto);
         dest.writeString(categoria);
         dest.writeString(nombreProducto);
+        dest.writeString(descripcion);
         dest.writeInt(precioUnidad);
         dest.writeInt(cantidadStock);
     }

@@ -69,6 +69,7 @@ public class ProductManagerCellAdapter extends ArrayAdapter<Producto> {
             // Obtener las vistas de la celda
             TextView textViewCategory = view.findViewById(R.id.textInfoCategory);
             TextView textViewName = view.findViewById(R.id.textInfoProducName);
+            TextView textViewDescription = view.findViewById(R.id.textDescription);
             TextView textViewPrice = view.findViewById(R.id.textInfoCost);
             TextView textViewAmount = view.findViewById(R.id.textInfoAmount);
             ImageView imageProduct = view.findViewById(R.id.imageViewProduct);
@@ -81,6 +82,7 @@ public class ProductManagerCellAdapter extends ArrayAdapter<Producto> {
             textViewCategory.setText(product.getCategoria());
             textViewName.setText(product.getNombreProducto());
             String productName = formatProductName(String.valueOf(product.getNombreProducto()));
+            textViewDescription.setText(product.getDescripcion());
             textViewPrice.setText(String.valueOf(product.getPrecioUnidad()));
             textViewAmount.setText(String.valueOf(product.getCantidadStock()));
             showImage(imageProduct, ProductsName.valueOf(productName));

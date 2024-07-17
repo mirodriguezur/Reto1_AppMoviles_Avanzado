@@ -28,6 +28,7 @@ public class AddProductActivity extends AppCompatActivity {
     private Spinner spnProductName;
     private EditText editTextPrice;
     private EditText editTextAmount;
+    private EditText editTextDescription;
 
     private ProductManagerPresenter productManagerPresenter;
 
@@ -47,6 +48,7 @@ public class AddProductActivity extends AppCompatActivity {
         imageProduct = findViewById(R.id.imageProduct);
         spnCategories = findViewById(R.id.spnCategories);
         spnProductName = findViewById(R.id.spnProductName);
+        editTextDescription = findViewById(R.id.txtProductDescription);
         editTextPrice = findViewById(R.id.editTextPrice);
         editTextAmount = findViewById(R.id.editTextAmount);
         Button btnAddProduct = findViewById(R.id.btnAddProduct);
@@ -80,13 +82,14 @@ public class AddProductActivity extends AppCompatActivity {
         int price = 0, amount = 0;
         String category = spnCategories.getSelectedItem().toString();
         String productName = spnProductName.getSelectedItem().toString();
+        String description = editTextDescription.getText().toString();
         if (!editTextPrice.getText().toString().isEmpty() && !editTextAmount.getText().toString().isEmpty()) {
             price = Integer.parseInt(editTextPrice.getText().toString());
             amount = Integer.parseInt(editTextAmount.getText().toString());
         }
 
-        if (!category.isEmpty() && !productName.isEmpty() && price > 0 && amount > 0) {
-            productManagerPresenter.insertProductToLocalDb(category, productName, price, amount, new ProductManagerPresenter.OnInsertProductListener() {
+        if (!category.isEmpty() && !productName.isEmpty() && price > 0 && amount > 0 && !description.isEmpty()) {
+            productManagerPresenter.insertProductToLocalDb(category, productName, description, price, amount, new ProductManagerPresenter.OnInsertProductListener() {
 
                 @Override
                 public void onSuccess() {
