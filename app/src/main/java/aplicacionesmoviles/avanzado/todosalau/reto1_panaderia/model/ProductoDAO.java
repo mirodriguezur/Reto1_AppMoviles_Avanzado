@@ -31,6 +31,7 @@ public class ProductoDAO implements ProductoDAOInterface {
             ContentValues values = new ContentValues();
             values.put("categoria", product.getCategoria());
             values.put("nombreProducto", product.getNombreProducto());
+            values.put("descripcion", product.getDescripcion());
             values.put("precioUnidad", product.getPrecioUnidad());
             values.put("cantidadStock", product.getCantidadStock());
             return db.insert("producto", null, values);
@@ -57,8 +58,9 @@ public class ProductoDAO implements ProductoDAOInterface {
                 product.setIdProducto(cursor.getString(0));
                 product.setCategoria(cursor.getString(1));
                 product.setNombreProducto(cursor.getString(2));
-                product.setPrecioUnidad(cursor.getInt(3));
-                product.setCantidadStock(cursor.getInt(4));
+                product.setDescripcion(cursor.getString(3));
+                product.setPrecioUnidad(cursor.getInt(4));
+                product.setCantidadStock(cursor.getInt(5));
                 products.add(product);
             } while (cursor.moveToNext());
         }
@@ -70,11 +72,12 @@ public class ProductoDAO implements ProductoDAOInterface {
     }
 
     // Método para actualizar un producto en la base de datos
-    public void updateProduct(String idProduct, String category, String productName, int price, int amount) {
+    public void updateProduct(String idProduct, String category, String productName, String description, int price, int amount) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("categoria", category);
         values.put("nombreProducto", productName);
+        values.put("descripcion", "Descripción del producto");
         values.put("precioUnidad", price);
         values.put("cantidadStock", amount);
 
@@ -119,6 +122,7 @@ public class ProductoDAO implements ProductoDAOInterface {
             ContentValues values = new ContentValues();
             values.put("categoria", product.getCategoria());
             values.put("nombreProducto", product.getNombreProducto());
+            values.put("descripcion", product.getDescripcion());
             values.put("precioUnidad", product.getPrecioUnidad());
             values.put("cantidadStock", product.getCantidadStock());
             db.update("producto", values, "idProducto" + "=?", new String[]{product.getIdProducto()});
