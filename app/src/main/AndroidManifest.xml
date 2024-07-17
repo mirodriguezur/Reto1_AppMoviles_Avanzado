@@ -15,6 +15,9 @@
         android:theme="@style/Theme.Reto1_Panaderia"
         tools:targetApi="31">
         <activity
+            android:name=".SelectProductActivity"
+            android:exported="false" />
+        <activity
             android:name=".SplashscreenActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="false"

@@ -54,4 +54,10 @@ dependencies {
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-firestore")
     implementation("com.google.firebase:firebase-database:21.0.0")
+
+
+    //Bottom Shet Dialog
+    implementation("com.google.android.material:material:1.2.0-alpha02")
+    implementation("com.makeramen:roundedimageview:2.3.0")
+
 }
