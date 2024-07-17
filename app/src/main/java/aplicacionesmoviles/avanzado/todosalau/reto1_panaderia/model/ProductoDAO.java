@@ -19,12 +19,6 @@ public class ProductoDAO implements ProductoDAOInterface {
     // Métodos para operaciones CRUD (Create, Read, Update, Delete)
     // Método para insertar un nuevo producto en la base de datos
     public long insertProduct(Producto product) {
-        // Verificar si el producto ya existe antes de agregarlo
-        /*if (productExists(product.getNombreProducto())) {
-            // El producto ya existe, no se hace nada
-            Log.i("ProductDatabaseHelper", "Producto con ID " + product.getNombreProducto() + " ya existe.");
-            return;
-        }*/
         SQLiteDatabase db = null;
         try {
             db = dbHelper.getWritableDatabase();
@@ -136,14 +130,14 @@ public class ProductoDAO implements ProductoDAOInterface {
     }
 
     // Método para verificar si un producto existe en la base de datos
-    /*public boolean productExists(String id) {
+    public boolean productExistsByName(String name) {
         SQLiteDatabase db = null;
         Cursor cursor = null;
         boolean exists = false;
         try {
             db = dbHelper.getReadableDatabase();
             // Consulta para verificar si el producto existe
-            cursor = db.rawQuery("SELECT COUNT(*) FROM producto"  + " WHERE idProducto" + "=?", new String[]{id});
+            cursor = db.rawQuery("SELECT COUNT(*) FROM producto"  + " WHERE nombreProducto" + "=?", new String[]{name});
             // Si el cursor tiene datos, obtener el conteo
             if (cursor != null && cursor.moveToFirst()) {
                 int count = cursor.getInt(0);
@@ -160,5 +154,5 @@ public class ProductoDAO implements ProductoDAOInterface {
             }
         }
         return exists;
-    }*/
+    }
 }
