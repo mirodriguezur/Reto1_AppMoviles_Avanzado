@@ -227,6 +227,27 @@ public class AddProductActivity extends AppCompatActivity {
             case DONA_STRAWBERRY_FROSTED:
                 imageProduct.setImageResource(R.drawable.dona_strawberry_frosted);
                 break;
+            case AROMATICA:
+                imageProduct.setImageResource(R.drawable.bebida_aromatica);
+                break;
+            case CAFE:
+                imageProduct.setImageResource(R.drawable.bebida_cafe);
+                break;
+            case COCACOLA:
+                imageProduct.setImageResource(R.drawable.bebida_cocacola);
+                break;
+            case COLOMBIANA:
+                imageProduct.setImageResource(R.drawable.bebida_colombiana);
+                break;
+            case AGUA_CON_GAS:
+                imageProduct.setImageResource(R.drawable.bebida_h2o);
+                break;
+            case AGUA_SIN_GAS:
+                imageProduct.setImageResource(R.drawable.bebida_h2o);
+                break;
+            case JUGO_HIT:
+                imageProduct.setImageResource(R.drawable.bebida_hit);
+                break;
             default:
                 imageProduct.setImageResource(R.drawable.ic_arrow_back);
         }
