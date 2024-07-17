@@ -11,7 +11,7 @@ android {
     defaultConfig {
         applicationId = "aplicacionesmoviles.avanzado.todosalau.reto1_panaderia"
         minSdk = 29
-        targetSdk = 33
+        targetSdk = 30
         versionCode = 1
         versionName = "1.0"
 
