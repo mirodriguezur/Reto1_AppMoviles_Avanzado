@@ -77,7 +77,7 @@ public class ProductoDAO implements ProductoDAOInterface {
         ContentValues values = new ContentValues();
         values.put("categoria", category);
         values.put("nombreProducto", productName);
-        values.put("descripcion", "Descripción del producto");
+        values.put("descripcion", description);
         values.put("precioUnidad", price);
         values.put("cantidadStock", amount);
 
