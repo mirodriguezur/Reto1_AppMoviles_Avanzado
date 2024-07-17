@@ -95,6 +95,7 @@ public class AddProductActivity extends AppCompatActivity {
                 public void onSuccess() {
                     // En caso de que la insersión fue exitosa, muestra mensaje exitoso
                     Toast.makeText(AddProductActivity.this, "Producto agregado exitosamente", Toast.LENGTH_SHORT).show();
+                    cleanFields();
                 }
 
                 @Override
@@ -156,7 +157,15 @@ public class AddProductActivity extends AppCompatActivity {
         return filteredProducts;
     }
 
+    private void cleanFields() {
+        // Limpia los campos después del registro exitoso
+        editTextDescription.setText("");
+        editTextPrice.setText("");
+        editTextAmount.setText("");
+    }
+
     private void showImage(ProductsName product) {
+        // Muestra la imagen correspondiente al producto seleccionado
         switch (product) {
             case PAN_BRETON:
                 imageProduct.setImageResource(R.drawable.pan_breton);
