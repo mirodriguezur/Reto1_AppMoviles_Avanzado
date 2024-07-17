@@ -208,6 +208,8 @@ public class ProductManagerCellAdapter extends ArrayAdapter<Producto> {
             case DONA_STRAWBERRY_FROSTED:
                 imageProduct.setImageResource(R.drawable.dona_strawberry_frosted);
                 break;
+            case AROMATICA:
+                imageProduct.setImageResource(R.drawable.bebida_aromatica);
             case CAFE:
                 imageProduct.setImageResource(R.drawable.bebida_cafe);
                 break;
