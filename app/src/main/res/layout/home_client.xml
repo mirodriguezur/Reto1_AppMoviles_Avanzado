@@ -319,7 +319,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:backgroundTint="#663333"
-                android:text="@string/ver_carrito" />
+                android:text="ver carrito" />
 
 
         </LinearLayout>

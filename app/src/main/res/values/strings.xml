@@ -41,6 +41,7 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="celda_descripcion">Descripción</string>
     <string name="lista_descripcion">Descripción: </string>
-    <string name="sincronizar_boton">Sincronizar</string>>
+    <string name="sincronizar_boton">Sincronizar</string>
+    <string name="ver_carrito">Ver carrito</string>>
 
 </resources>
