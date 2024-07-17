@@ -7,4 +7,5 @@ public interface ProductoDAOInterface {
     List<Producto> getAllProducts();
     void updateProduct(String idProduct, String category, String productName, String description, int price, int amount);
     void deleteProduct(String id);
+    boolean productExistsByName(String name);
 }

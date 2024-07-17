@@ -103,6 +103,12 @@ public class AddProductActivity extends AppCompatActivity {
                     // Si la insersión falla, muestra mensaje de falla
                     Toast.makeText(AddProductActivity.this, "Error al agregar producto", Toast.LENGTH_SHORT).show();
                 }
+
+                @Override
+                public void onExistingProduct() {
+                    // Si el producto ya existe, muestra mensaje de que ya existe
+                    Toast.makeText(AddProductActivity.this, "El producto ya existe", Toast.LENGTH_SHORT).show();
+                }
             });
         } else {
             Toast.makeText(this, "Complete todos los campos", Toast.LENGTH_SHORT).show();

@@ -16,8 +16,14 @@ public class ProductManagerPresenter {
     }
 
     public void insertProductToLocalDb(String category, String productName, String description, int price, int amount, OnInsertProductListener listener) {
-        String validCategory = setFormatCategoryString(category);
+        String validCategory = setFormatCategoryString(category); //TODO: Revisar porque  no funciona
         String validProductName = setFormatProductNameString(productName);
+
+        if (productDAO.productExistsByName(validProductName)) {
+            listener.onExistingProduct();
+            return;
+        }
+
         Producto product = new Producto(validCategory, validProductName, description, price, amount);
         long result =productDAO.insertProduct(product);
         if (result != -1) {
@@ -62,5 +68,6 @@ public class ProductManagerPresenter {
     public interface OnInsertProductListener {
         void onSuccess();
         void onError();
+        void onExistingProduct();
     }
 }
