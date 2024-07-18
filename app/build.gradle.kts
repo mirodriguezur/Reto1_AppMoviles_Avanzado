@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "aplicacionesmoviles.avanzado.todosalau.reto1_panaderia"
-        minSdk = 30
+        minSdk = 29
         targetSdk = 30
         versionCode = 1
         versionName = "1.0"
@@ -30,6 +30,9 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    buildFeatures {
+        viewBinding = true
     }
 }
 
@@ -51,4 +54,10 @@ dependencies {
     implementation("com.google.firebase:firebase-auth")
     implementation("com.google.firebase:firebase-firestore")
     implementation("com.google.firebase:firebase-database:21.0.0")
+
+
+    //Bottom Shet Dialog
+    implementation("com.google.android.material:material:1.2.0-alpha02")
+    implementation("com.makeramen:roundedimageview:2.3.0")
+
 }

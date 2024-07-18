@@ -20,7 +20,16 @@ public enum ProductsName {
     DONA_CHOCOLATE_FROSTED(ProductCategory.DONAS),
     DONA_COMBO_BOSTON(ProductCategory.DONAS),
     DONA_SPUDNUT(ProductCategory.DONAS),
-    DONA_STRAWBERRY_FROSTED(ProductCategory.DONAS);
+    DONA_STRAWBERRY_FROSTED(ProductCategory.DONAS),
+
+    AROMATICA(ProductCategory.BEBIDAS),
+    CAFE(ProductCategory.BEBIDAS),
+    COCACOLA(ProductCategory.BEBIDAS),
+    COLOMBIANA(ProductCategory.BEBIDAS),
+    AGUA_SIN_GAS(ProductCategory.BEBIDAS),
+    AGUA_CON_GAS(ProductCategory.BEBIDAS),
+    JUGO_HIT(ProductCategory.BEBIDAS);
+
 
     private final ProductCategory category;
 

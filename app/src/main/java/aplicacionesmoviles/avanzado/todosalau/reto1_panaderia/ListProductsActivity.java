@@ -3,6 +3,7 @@ package aplicacionesmoviles.avanzado.todosalau.reto1_panaderia;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -22,6 +23,7 @@ public class ListProductsActivity extends AppCompatActivity {
     private ProductManagerCellAdapter productCellAdapter;
     private ListView listViewProducts;
     private ProductManagerPresenter productManagerPresenter;
+    private Button btnSync;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,7 @@ public class ListProductsActivity extends AppCompatActivity {
 
     private void setupView() {
         ImageButton btnBack = findViewById(R.id.btnBack);
+        btnSync = findViewById(R.id.buttonSynch);
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,7 +55,35 @@ public class ListProductsActivity extends AppCompatActivity {
             }
         });
 
-        listViewProducts = findViewById(R.id.listViewProducts);
+        btnSync.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                productManagerPresenter.syncProductsWithFirebase(new ProductManagerPresenter.OnInsertProductsInFirebaseListener(){
+
+                    @Override
+                    public void onConnectionError() {
+                        Toast.makeText(ListProductsActivity.this, "No hay conexión a internet, intente más tarde", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onErrorWhenTryingToDeleteProduct() {
+                        Toast.makeText(ListProductsActivity.this, "No fue posilbe eliminar los productos, intente más tarde", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onSuccessInsertProducts() {
+                        Toast.makeText(ListProductsActivity.this, "Los productos fueron agregados exitosamente a Firebase", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onErrorInsertProducts() {
+                        Toast.makeText(ListProductsActivity.this, "No se pudo agregar los productos a Firebase, intente más tarde", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+
+        ListView listViewProducts = findViewById(R.id.listViewProducts);
         productCellAdapter = new ProductManagerCellAdapter(this, R.layout.list_item_product, products);
         listViewProducts.setAdapter(productCellAdapter);
         updateProductList(products);

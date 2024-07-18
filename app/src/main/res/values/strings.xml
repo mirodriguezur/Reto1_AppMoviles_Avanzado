@@ -36,5 +36,12 @@
     <string name="celda_modificar_boton">Modificar</string>
     <string name="celda_eliminar_boton">Eliminar</string>
     <string name="price_format">%.2f</string>
+    <string name="title_activity_splashscreen">SplashscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="celda_descripcion">Descripción</string>
+    <string name="lista_descripcion">Descripción: </string>
+    <string name="sincronizar_boton">Sincronizar</string>
+    <string name="ver_carrito">Ver carrito</string>>
 
 </resources>

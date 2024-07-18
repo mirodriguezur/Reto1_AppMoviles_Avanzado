@@ -5,45 +5,62 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
-        android:id="@+id/linearLayoutCategories"
-        android:layout_width="335dp"
+        android:id="@+id/linearLayoutParent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/imageModifProduct"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_weight="0"
-            app:srcCompat="@drawable/pan_breton" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="30dp"
+        android:orientation="vertical">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0"
-            android:padding="10dp"
-            android:orientation="vertical">
+            android:id="@+id/linearLayoutCategories"
+            android:layout_width="335dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/editTextPriceEdit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/precio_producto_label"
-                android:inputType="number" />
+            <ImageView
+                android:id="@+id/imageModifProduct"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_weight="0"
+                app:srcCompat="@drawable/pan_breton" />
 
-            <EditText
-                android:id="@+id/editTextAmountEdit"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/cantidad_stock_label"
-                android:inputType="number" />
+                android:layout_height="match_parent"
+                android:layout_weight="0"
+                android:padding="10dp"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/editTextPriceEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/precio_producto_label"
+                    android:inputType="number" />
+
+                <EditText
+                    android:id="@+id/editTextAmountEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/cantidad_stock_label"
+                    android:inputType="number" />
+            </LinearLayout>
         </LinearLayout>
+
+        <EditText
+            android:id="@+id/editTextDescriptionEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:textSize="18sp"
+            android:hint="@string/celda_descripcion" />
 
     </LinearLayout>
 
