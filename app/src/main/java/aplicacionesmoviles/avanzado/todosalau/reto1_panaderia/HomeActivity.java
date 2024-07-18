@@ -23,7 +23,6 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_home);
-
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         textViewNombre = findViewById(R.id.textViewNombre);

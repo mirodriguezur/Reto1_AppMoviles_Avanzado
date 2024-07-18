@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp" />
 
-    <androidx.cardview.widget.CardView
+     <androidx.cardview.widget.CardView
         android:layout_width="350dp"
         android:layout_height="match_parent"
         android:layout_gravity="center"
@@ -272,7 +272,7 @@
                             android:layout_height="48dp"
                             android:layout_weight="1"
                             android:padding="10dp"
-                            android:textSize="10sp"
+                            android:textSize="10dp"
                             android:backgroundTint="#663333"
                             android:textStyle="bold"
                             android:text="Bebidas" />
@@ -319,7 +319,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:backgroundTint="#663333"
-                android:text="ver carrito"/>
+                android:text="@string/ver_carrito" />
 
 
         </LinearLayout>
