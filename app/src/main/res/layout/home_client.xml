@@ -272,7 +272,7 @@
                             android:layout_height="48dp"
                             android:layout_weight="1"
                             android:padding="10dp"
-                            android:textSize="10dp"
+                            android:textSize="10sp"
                             android:backgroundTint="#663333"
                             android:textStyle="bold"
                             android:text="Bebidas" />
@@ -319,7 +319,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:backgroundTint="#663333"
-                android:text="ver carrito" />
+                android:text="ver carrito"/>
 
 
         </LinearLayout>
