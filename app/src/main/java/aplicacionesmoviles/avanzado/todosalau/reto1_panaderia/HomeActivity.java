@@ -47,9 +47,9 @@ public class HomeActivity extends AppCompatActivity {
                      finish();
                  } else {
                      // El usuario no es administrador
-                     Log.d("HomeActivity", "El usuario no es administrador.");
-                     String nombre = (String) data.get("nombre");
-                     textViewNombre.setText(nombre);
+                     Intent intent = new Intent(HomeActivity.this, HomeClient.class);
+                     startActivity(intent);
+                     finish();
 
                  }
 

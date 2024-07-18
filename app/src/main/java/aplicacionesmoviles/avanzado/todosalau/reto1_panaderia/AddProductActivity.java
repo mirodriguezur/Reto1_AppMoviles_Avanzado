@@ -32,8 +32,6 @@ public class AddProductActivity extends AppCompatActivity {
 
     private ProductManagerPresenter productManagerPresenter;
 
-    private ProductManagerPresenter productManagerPresenter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
