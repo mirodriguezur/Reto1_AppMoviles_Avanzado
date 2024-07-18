@@ -21,6 +21,7 @@ import aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.view.ProductManage
 public class ListProductsActivity extends AppCompatActivity {
     private ArrayList<Producto> products; // Lista de usuarios a mostrar
     private ProductManagerCellAdapter productCellAdapter;
+    private ListView listViewProducts;
     private ProductManagerPresenter productManagerPresenter;
     private Button btnSync;
 

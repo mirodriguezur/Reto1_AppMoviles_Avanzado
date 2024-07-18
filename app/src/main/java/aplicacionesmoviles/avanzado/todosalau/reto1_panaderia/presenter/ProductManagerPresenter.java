@@ -1,7 +1,9 @@
 package aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.presenter;
 
 import android.content.Context;
-import android.widget.Toast;
+import android.util.Log;
+
+import androidx.lifecycle.MutableLiveData;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -21,6 +23,7 @@ public class ProductManagerPresenter {
     private ProductoDAOInterface productDAO;
     private ProductoFirebaseInterface productoFirebaseDAO;
     private NetworkMonitor networkMonitor;
+    public MutableLiveData<List<Producto>> listProducts = new MutableLiveData<>();
 
     public ProductManagerPresenter(Context context) {
         this.productDAO = new ProductoDAO(context);
@@ -113,6 +116,20 @@ public class ProductManagerPresenter {
                 }
             });
         }
+    }
+
+    public void getAllProductsFromFirebase() {
+        productoFirebaseDAO.getAllProducts(new GetProductsCallback() {
+            @Override
+            public void onProductsRetrieved(List<Producto> products) {
+                listProducts.postValue(products);
+            }
+
+            @Override
+            public void onError() {
+
+            }
+        });
     }
 
     private void synchronizeProductsToFirebase(List<Producto> productsFromSQLite, OnInsertProductsInFirebaseListener listener) {
