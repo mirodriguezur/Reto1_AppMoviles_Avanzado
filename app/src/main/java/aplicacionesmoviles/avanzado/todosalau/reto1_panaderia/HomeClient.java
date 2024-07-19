@@ -4,9 +4,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +24,9 @@ import aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.view.ProductManage
 import aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.view.ProductManagerClientAdapter;
 
 public class HomeClient extends AppCompatActivity {
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
+    private TextView textViewHola;
 
     private List<Producto> listProducts = new ArrayList<>();
     private ProductManagerPresenter productManagerPresenter;
@@ -28,6 +35,14 @@ public class HomeClient extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_client);
+
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+
+        textViewHola = findViewById(R.id.textViewHola);
+
+        getUserInfo();
+
         productManagerPresenter = new ProductManagerPresenter(this);
         productManagerPresenter.listProducts.observe(this, products -> {
             listProducts.addAll(products);
@@ -74,5 +89,16 @@ public class HomeClient extends AppCompatActivity {
         }
         Log.d("Producto", "fin");
         return filteredProducts;
+    }
+
+    private void getUserInfo() {
+
+        String id = mAuth.getCurrentUser().getUid();
+        db.collection("usuarios").document(id).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                String name = task.getResult().getString("nombre");
+                textViewHola.setText("Bienvenido, " + name);
+            }
+        });
     }
 }
