@@ -5,6 +5,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -87,6 +88,11 @@ public class HomeClient extends AppCompatActivity {
                 filteredProducts.add(product);
             }
         }
+
+        if (filteredProducts.isEmpty()) {
+            Toast.makeText(HomeClient.this, "No hay productos disponibles en esta categoría", Toast.LENGTH_SHORT).show();
+        }
+
         Log.d("Producto", "fin");
         return filteredProducts;
     }

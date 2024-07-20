@@ -26,7 +26,7 @@
     <string name="nombre_producto_label">Nombre del producto:</string>
     <string name="precio_producto_label">Precio unidad $</string>
     <string name="cantidad_stock_label">Cantidad stock</string>
-    <string name="agregar_producto_boton">Agregar</string>
+    <string name="agregar_producto_boton">Cantidad:</string>
     <string name="ver_productos_boton">Ver Productos</string>
     <string name="listado_de_productos">Listado de productos</string>
     <string name="celda_categoria_label">Categoría: </string>

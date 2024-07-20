@@ -1,113 +1,90 @@
 package aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.view;
 
-import android.content.Context;
-import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
+import androidx.annotation.Nullable;
 
-import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.makeramen.roundedimageview.RoundedImageView;
 
 import aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.R;
-import aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.SelectProductActivity;
 import aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.model.Producto;
 import aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.presenter.ProductsName;
 
-public class ProductManagerClientAdapter extends ArrayAdapter<Producto> {
+public class ProductBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
-    private final List<Producto> internalProducts;
-    // Recursos de diseño y contexto
-    private int resourceLayout;
-    private Context mContext;
+    private int amountProduct;
+    private static final String ARG_PRODUCT = "product";
+    private Producto producto;
+    private EditText amountProductTextView;
 
-    public ProductManagerClientAdapter(Context context, int resource, List<Producto> items) {
-        super(context, resource, new ArrayList<>());
-        this.resourceLayout = resource;
-        this.mContext = context;
-        internalProducts = new ArrayList<>(items);
+    public static ProductBottomSheetDialogFragment newInstance(Producto producto) {
+        ProductBottomSheetDialogFragment fragment = new ProductBottomSheetDialogFragment();
+        Bundle args = new Bundle();
+        args.putParcelable(ARG_PRODUCT, producto);
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Override
-    public int getCount() {
-        return internalProducts.size();
-    }
-
-    @Override
-    public Producto getItem(int position) {
-        return internalProducts.get(position);
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View view = convertView;
-
-        // Si la vista es nula, inflar el diseño
-        if (view == null) {
-            LayoutInflater inflater = LayoutInflater.from(mContext);
-            view = inflater.inflate(resourceLayout, parent, false);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            producto = getArguments().getParcelable(ARG_PRODUCT);
         }
+    }
 
-        // Obtener el producto actual
-        Producto product = getItem(position);
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_bottom_sheet, container, false);
 
-        // Si el producto es válido, establecer los valores en la vista
-        if (product != null) {
-            // Obtener las vistas de la celda
-            TextView textViewName = view.findViewById(R.id.nameProductTextView);
-            TextView textViewPrice = view.findViewById(R.id.priceProductTextView);
-            ImageView imageProduct = view.findViewById(R.id.imageProductClient);
+        // Accede a las vistas y actualiza con la información del producto
+        TextView productNameTextView = view.findViewById(R.id.txtNameProductBottomSheet);
+        TextView productPriceTextView = view.findViewById(R.id.txtProductCostBottomSheet);
+        TextView descriptionProductTextView = view.findViewById(R.id.txtDescriptionProductBottomSheet);
+        RoundedImageView productImageView = view.findViewById(R.id.imageProductBottomSheet);
+        Button addProductButton = view.findViewById(R.id.buttonAddProductBottomSheet);
+        Button decreaseProductButton = view.findViewById(R.id.buttonDecreaseProductBottomSheet);
+        amountProductTextView = view.findViewById(R.id.txtAmountNumberBottomSheet);
+        amountProduct = Integer.parseInt(amountProductTextView.getText().toString());
 
-            // Obtener los botones de edición y eliminación
-            FloatingActionButton buttonAdd = view.findViewById(R.id.addProductButton);
+        if (producto != null) {
+            productNameTextView.setText(producto.getNombreProducto());
+            int cost = producto.getPrecioUnidad();
+            productPriceTextView.setText(String.valueOf(cost));
+            descriptionProductTextView.setText(producto.getDescripcion());
+            String productName = formatProductName(String.valueOf(producto.getNombreProducto()));
+            showImage(productImageView, ProductsName.valueOf(productName));
 
-            // Establecer los valores en los campos de la celda.
-            textViewName.setText(product.getNombreProducto());
-            String productName = formatProductName(String.valueOf(product.getNombreProducto()));
-            textViewPrice.setText(String.valueOf(product.getPrecioUnidad()));
-            showImage(imageProduct, ProductsName.valueOf(productName));
-
-            // Asignar listeners a los botones
-            buttonAdd.setOnClickListener(new View.OnClickListener() {
+            addProductButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ProductBottomSheetDialogFragment bottomSheetFragment = ProductBottomSheetDialogFragment.newInstance(product);
-                    bottomSheetFragment.show(((FragmentActivity) mContext).getSupportFragmentManager(), "product_bottom_sheet");
+                    amountProduct++;
+                    amountProductTextView.setText(String.valueOf(amountProduct));
+                }
+            });
+
+            decreaseProductButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (amountProduct > 0) {
+                        amountProduct--;
+                        amountProductTextView.setText(String.valueOf(amountProduct));
+                    }
                 }
             });
         }
+
         return view;
-    }
-
-    @Override
-    public void clear() {
-        super.clear();
-        internalProducts.clear();
-    }
-
-    @Override
-    public void addAll(@NonNull Collection<? extends Producto> collection) {
-        super.clear();
-        internalProducts.clear();
-        internalProducts.addAll(collection);
-        notifyDataSetChanged();
     }
 
     private String formatProductName(String productName) {
