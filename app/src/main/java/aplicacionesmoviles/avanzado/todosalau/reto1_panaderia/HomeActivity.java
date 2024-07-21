@@ -47,7 +47,7 @@ public class HomeActivity extends AppCompatActivity {
                      finish();
                  } else {
                      // El usuario no es administrador
-                     Intent intent = new Intent(HomeActivity.this, HomeClient.class);
+                     Intent intent = new Intent(HomeActivity.this, HomeClientActivity.class);
                      startActivity(intent);
                      finish();
 

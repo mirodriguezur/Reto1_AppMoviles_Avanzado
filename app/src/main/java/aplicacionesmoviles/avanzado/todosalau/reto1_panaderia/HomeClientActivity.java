@@ -1,5 +1,6 @@
 package aplicacionesmoviles.avanzado.todosalau.reto1_panaderia;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -15,22 +16,22 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observer;
 
+import aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.model.InfoPartialOrder;
 import aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.model.Producto;
+import aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.presenter.OrderManagerPresenter;
 import aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.presenter.ProductCategory;
 import aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.presenter.ProductManagerPresenter;
-import aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.presenter.ProductsName;
-import aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.view.ProductManagerCellAdapter;
 import aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.view.ProductManagerClientAdapter;
 
-public class HomeClient extends AppCompatActivity {
+public class HomeClientActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
     private TextView textViewHola;
 
     private List<Producto> listProducts = new ArrayList<>();
     private ProductManagerPresenter productManagerPresenter;
+    private OrderManagerPresenter orderManagerPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,6 +46,7 @@ public class HomeClient extends AppCompatActivity {
         getUserInfo();
 
         productManagerPresenter = new ProductManagerPresenter(this);
+        orderManagerPresenter = new OrderManagerPresenter(this);
         productManagerPresenter.listProducts.observe(this, products -> {
             listProducts.addAll(products);
             setAdapter(products);
@@ -55,6 +57,7 @@ public class HomeClient extends AppCompatActivity {
         Button btnDona = findViewById(R.id.donaFilterButton);
         Button btnPostres = findViewById(R.id.postreFilterButton);
         Button btnBebidas = findViewById(R.id.bebidasFilterButton);
+        Button btnSeeCart = findViewById(R.id.buttonSeeCart);
 
         btnBebidas.setOnClickListener(v -> {
             setAdapter(filterProductsByCategory(ProductCategory.BEBIDAS));
@@ -71,10 +74,17 @@ public class HomeClient extends AppCompatActivity {
         btnPan.setOnClickListener(v -> {
             setAdapter(filterProductsByCategory(ProductCategory.PANES));
         });
+
+        btnSeeCart.setOnClickListener(v -> {
+            Intent goToRequestOrderActivity = new Intent(HomeClientActivity.this, RequestOrderActivity.class);
+            List<InfoPartialOrder> partialOrders = orderManagerPresenter.getListPartialOrders();
+            goToRequestOrderActivity.putParcelableArrayListExtra("partialOrders", (ArrayList<InfoPartialOrder>) partialOrders);
+            startActivity(goToRequestOrderActivity);
+        });
     }
 
     public void setAdapter( List<Producto> products ) {
-        ProductManagerClientAdapter adapter = new ProductManagerClientAdapter(this, R.layout.client_list_item_product, products);
+        ProductManagerClientAdapter adapter = new ProductManagerClientAdapter(this, R.layout.client_list_item_product, products, orderManagerPresenter);
         ListView listViewProducts = findViewById(R.id.listViewProductsClient);
         listViewProducts.setAdapter(adapter);
     }
@@ -90,7 +100,7 @@ public class HomeClient extends AppCompatActivity {
         }
 
         if (filteredProducts.isEmpty()) {
-            Toast.makeText(HomeClient.this, "No hay productos disponibles en esta categoría", Toast.LENGTH_SHORT).show();
+            Toast.makeText(HomeClientActivity.this, "No hay productos disponibles en esta categoría", Toast.LENGTH_SHORT).show();
         }
 
         Log.d("Producto", "fin");

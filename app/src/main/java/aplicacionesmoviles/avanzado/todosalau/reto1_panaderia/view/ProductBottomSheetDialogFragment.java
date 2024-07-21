@@ -16,7 +16,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.R;
+import aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.model.InfoPartialOrder;
 import aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.model.Producto;
+import aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.presenter.OrderManagerPresenter;
 import aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.presenter.ProductsName;
 
 public class ProductBottomSheetDialogFragment extends BottomSheetDialogFragment {
@@ -25,6 +27,7 @@ public class ProductBottomSheetDialogFragment extends BottomSheetDialogFragment 
     private static final String ARG_PRODUCT = "product";
     private Producto producto;
     private EditText amountProductTextView;
+    private OrderManagerPresenter orderManagerPresenter;
 
     public static ProductBottomSheetDialogFragment newInstance(Producto producto) {
         ProductBottomSheetDialogFragment fragment = new ProductBottomSheetDialogFragment();
@@ -54,6 +57,7 @@ public class ProductBottomSheetDialogFragment extends BottomSheetDialogFragment 
         RoundedImageView productImageView = view.findViewById(R.id.imageProductBottomSheet);
         Button addProductButton = view.findViewById(R.id.buttonAddProductBottomSheet);
         Button decreaseProductButton = view.findViewById(R.id.buttonDecreaseProductBottomSheet);
+        Button addToCartButton = view.findViewById(R.id.buttonAddProductToCart);
         amountProductTextView = view.findViewById(R.id.txtAmountNumberBottomSheet);
         amountProduct = Integer.parseInt(amountProductTextView.getText().toString());
 
@@ -82,9 +86,26 @@ public class ProductBottomSheetDialogFragment extends BottomSheetDialogFragment 
                     }
                 }
             });
+
+            addToCartButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (amountProduct > 0) {
+                        InfoPartialOrder partialOrder = new InfoPartialOrder(producto.getIdProducto(), producto.getCategoria(), producto.getNombreProducto(), amountProduct, producto.getPrecioUnidad());
+                        orderManagerPresenter.savePartialOrder(partialOrder);
+                        dismiss();
+                    } else {
+                        // TODO: Mostrar mensaje de que toca agregar al menos un producto.
+                    }
+                }
+            });
         }
 
         return view;
+    }
+
+    public void setOrderManagerPresenter(OrderManagerPresenter orderManagerPresenter) {
+        this.orderManagerPresenter = orderManagerPresenter;
     }
 
     private String formatProductName(String productName) {

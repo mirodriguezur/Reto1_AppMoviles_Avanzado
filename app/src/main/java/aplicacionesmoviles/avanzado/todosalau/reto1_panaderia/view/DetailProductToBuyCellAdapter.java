@@ -1,21 +1,16 @@
 package aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.view;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
 
-import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -23,35 +18,30 @@ import java.util.Collection;
 import java.util.List;
 
 import aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.R;
-import aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.SelectProductActivity;
-import aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.model.Producto;
-import aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.presenter.OrderManagerPresenter;
+import aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.model.InfoPartialOrder;
 import aplicacionesmoviles.avanzado.todosalau.reto1_panaderia.presenter.ProductsName;
 
-public class ProductManagerClientAdapter extends ArrayAdapter<Producto> {
-
-    private final List<Producto> internalProducts;
+public class DetailProductToBuyCellAdapter extends ArrayAdapter<InfoPartialOrder> {
+    private final List<InfoPartialOrder> infoProducts;
     // Recursos de diseño y contexto
     private int resourceLayout;
     private Context mContext;
-    private OrderManagerPresenter orderManagerPresenter;
 
-    public ProductManagerClientAdapter(Context context, int resource, List<Producto> items, OrderManagerPresenter orderManagerPresenter) {
+    public DetailProductToBuyCellAdapter(Context context, int resource, List<InfoPartialOrder> items) {
         super(context, resource, new ArrayList<>());
-        this.orderManagerPresenter = orderManagerPresenter;
         this.resourceLayout = resource;
         this.mContext = context;
-        internalProducts = new ArrayList<>(items);
+        infoProducts = new ArrayList<>(items);
     }
 
     @Override
     public int getCount() {
-        return internalProducts.size();
+        return infoProducts.size();
     }
 
     @Override
-    public Producto getItem(int position) {
-        return internalProducts.get(position);
+    public InfoPartialOrder getItem(int position) {
+        return infoProducts.get(position);
     }
 
     @Override
@@ -59,6 +49,8 @@ public class ProductManagerClientAdapter extends ArrayAdapter<Producto> {
         return position;
     }
 
+    // Método para obtener la vista del adaptador para un elemento específico
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = convertView;
 
@@ -69,32 +61,30 @@ public class ProductManagerClientAdapter extends ArrayAdapter<Producto> {
         }
 
         // Obtener el producto actual
-        Producto product = getItem(position);
+        InfoPartialOrder infoProduct = getItem(position);
 
         // Si el producto es válido, establecer los valores en la vista
-        if (product != null) {
+        if (infoProduct != null) {
             // Obtener las vistas de la celda
-            TextView textViewName = view.findViewById(R.id.nameProductTextView);
-            TextView textViewPrice = view.findViewById(R.id.priceProductTextView);
-            ImageView imageProduct = view.findViewById(R.id.imageProductClient);
+            TextView textViewName = view.findViewById(R.id.nameProductToBuyTextView);
+            TextView textViewPrice = view.findViewById(R.id.unitPriceProductToBuyTextView);
+            TextView textViewAmount = view.findViewById(R.id.amountProductToBuyTextView);
+            TextView textViewTotalPrice = view.findViewById(R.id.totalPriceProductToBuyTextView);
+            ImageView imageProduct = view.findViewById(R.id.imageDetailProductToBuy);
 
             // Obtener los botones de edición y eliminación
-            FloatingActionButton buttonAdd = view.findViewById(R.id.addProductButton);
+            FloatingActionButton deleteButton = view.findViewById(R.id.deleteProductToBuyFloatingButton);
 
             // Establecer los valores en los campos de la celda.
-            textViewName.setText(product.getNombreProducto());
-            String productName = formatProductName(String.valueOf(product.getNombreProducto()));
-            textViewPrice.setText(String.valueOf(product.getPrecioUnidad()));
+            textViewName.setText(infoProduct.getNameProduct());
+            String productName = formatProductName(String.valueOf(infoProduct.getNameProduct()));
+            textViewPrice.setText(String.valueOf(infoProduct.getUnitPrice()));
+            textViewAmount.setText(String.valueOf(infoProduct.getAmount()));
+            textViewTotalPrice.setText(String.valueOf(infoProduct.getAmount() * infoProduct.getUnitPrice()));
             showImage(imageProduct, ProductsName.valueOf(productName));
 
-            // Asignar listeners a los botones
-            buttonAdd.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    ProductBottomSheetDialogFragment bottomSheetFragment = ProductBottomSheetDialogFragment.newInstance(product);
-                    bottomSheetFragment.setOrderManagerPresenter(orderManagerPresenter);
-                    bottomSheetFragment.show(((FragmentActivity) mContext).getSupportFragmentManager(), "product_bottom_sheet");
-                }
+            deleteButton.setOnClickListener(v -> {
+                // TODO: Borrar elemento de la lista.
             });
         }
         return view;
@@ -103,14 +93,14 @@ public class ProductManagerClientAdapter extends ArrayAdapter<Producto> {
     @Override
     public void clear() {
         super.clear();
-        internalProducts.clear();
+        infoProducts.clear();
     }
 
     @Override
-    public void addAll(@NonNull Collection<? extends Producto> collection) {
+    public void addAll(@NonNull Collection<? extends InfoPartialOrder> collection) {
         super.clear();
-        internalProducts.clear();
-        internalProducts.addAll(collection);
+        infoProducts.clear();
+        infoProducts.addAll(collection);
         notifyDataSetChanged();
     }
 
@@ -199,4 +189,5 @@ public class ProductManagerClientAdapter extends ArrayAdapter<Producto> {
                 imageProduct.setImageResource(R.drawable.ic_arrow_back);
         }
     }
+
 }

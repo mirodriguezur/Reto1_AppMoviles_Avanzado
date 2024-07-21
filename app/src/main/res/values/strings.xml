@@ -29,6 +29,7 @@
     <string name="agregar_producto_boton">Cantidad:</string>
     <string name="ver_productos_boton">Ver Productos</string>
     <string name="listado_de_productos">Listado de productos</string>
+    <string name="listado_de_productos_a_comprar">Confirmar Pedido</string>
     <string name="celda_categoria_label">Categoría: </string>
     <string name="celda_nombre_producto_label">Nombre: </string>
     <string name="celda_precio_label">Precio: </string>
@@ -42,6 +43,7 @@
     <string name="celda_descripcion">Descripción</string>
     <string name="lista_descripcion">Descripción: </string>
     <string name="sincronizar_boton">Sincronizar</string>
+    <string name="comprar_boton">Comprar</string>
     <string name="ver_carrito">Ver carrito</string>>
 
 </resources>
